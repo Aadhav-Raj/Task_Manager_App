@@ -24,10 +24,12 @@ lateinit var  databaseHelper:DatabaseHelper
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         //arrary= ArrayList()
-         list= mutableListOf<DataModel>()
+         //list= mutableListOf<DataModel>()
+
 
         databaseHelper=DatabaseHelper(applicationContext)
-
+        //val list2:List<DataModel>
+        list=databaseHelper.readData()
         /*val dataList=list.map{
             dataModel ->  """
                 ${dataModel.head}
@@ -38,15 +40,30 @@ lateinit var  databaseHelper:DatabaseHelper
          */
 
 
-        arrayAdapter= CustomAdapter(this, R.layout.list_item, list)
+        arrayAdapter= CustomAdapter(this,
+            R.layout.list_item,
+            list)
+
         binding.list.adapter=arrayAdapter
+        binding.list.setOnItemClickListener{adapterView,view,postion, id ->
+
+            val task=adapterView.getItemAtPosition(postion) as DataModel
+            val builder2=AlertDialog.Builder(this)
+            val inflater2=layoutInflater
+            //val dialog2=inflater2.inflate(R.layout.display,null)
+            //builder2.setPositiveButtonIcon(@drawable.)
+
+            builder2.setTitle(task.head)
+/*            Toast.makeText(this,
+                """The Task : ${task.head} 
+                   Desciption: ${task.desc}
+            """.trimMargin(),Toast.LENGTH_SHORT).show()*/
+        }
         binding.floatingButton.setOnClickListener{view ->
             /*Snackbar.make(view,"task Added",Snackbar.LENGTH_LONG)
                 .setAction("Undo",null)
                 .show()
-
              */
-
             val builder= AlertDialog.Builder(this)
             val inflater=layoutInflater
             builder.setTitle("Add Task")
@@ -60,7 +77,7 @@ lateinit var  databaseHelper:DatabaseHelper
                 dialog,_ ->
                 val ed1_v=ed1.text.toString()
                 val ed2_v=ed2.text.toString()
-                addItem(DataModel(ed1_v,ed2_v))
+                addItem(ed1_v,ed2_v)
                 Toast.makeText(this,"Task Added",Toast.LENGTH_SHORT).show()
             }
             builder.setNegativeButton("Cancel"){
@@ -77,19 +94,23 @@ lateinit var  databaseHelper:DatabaseHelper
         }
 
     }
+    fun REDO(id:Long,head:String,desc:String)
+    {
+        list.add(DataModel(id,head,desc))
+        arrayAdapter.notifyDataSetChanged()
+        //list.clear()
+        //list=databaseHelper.readDataLast()
+    }
 
-    private fun addItem(datamodel: DataModel) {
-        val s:String
-        s="""
-            ${datamodel.head}
-            ${datamodel.desc}
-        """.trimIndent()
-
-
+    private fun addItem(head:String,desc:String) {
 
         //list.add(datamodel)
+        val insert=databaseHelper.insertData(head,desc)
+        if (insert!=-1L)
+        {
+            REDO(insert,head,desc)
+        }
 
-        arrayAdapter.notifyDataSetChanged()
 
 
     }

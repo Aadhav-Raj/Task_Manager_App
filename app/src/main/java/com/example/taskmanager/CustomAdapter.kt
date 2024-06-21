@@ -8,10 +8,14 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 
 
-class CustomAdapter(context: Context, private val resource: Int, private val data: MutableList<DataModel>) :
+class CustomAdapter(context: Context,
+                    private val resource: Int,
+                    private val data: List<DataModel>) :
     ArrayAdapter<DataModel>(context, resource, data) {
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+    override fun getView(position: Int,
+                         convertView: View?,
+                         parent: ViewGroup): View {
         var view = convertView
         val viewHolder: ViewHolder
 

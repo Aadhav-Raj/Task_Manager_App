@@ -47,7 +47,7 @@ class DatabaseHelper (context: Context):SQLiteOpenHelper(context,
 
     }
 
-    fun readData():List<DataModel>{
+    fun readData():MutableList<DataModel>{
         val dataList=mutableListOf<DataModel>()
         val cursor:Cursor
         cursor=readableDatabase.query(TABLE_NAME,null,null,null,null,null,null)
@@ -57,7 +57,7 @@ class DatabaseHelper (context: Context):SQLiteOpenHelper(context,
                 val id=getLong(getColumnIndexOrThrow(COL_ID))
                 val head=getString(getColumnIndexOrThrow(COL_HEAD))
                 val desc=getString(getColumnIndexOrThrow(COL_DES))
-                dataList.add(DataModel(head,desc))
+                dataList.add(DataModel(id,head,desc))
             }
         }
 
