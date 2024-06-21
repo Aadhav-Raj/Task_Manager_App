@@ -109,6 +109,7 @@ lateinit var  databaseHelper:DatabaseHelper
         if (insert!=-1L)
         {
             REDO(insert,head,desc)
+
         }
 
 
