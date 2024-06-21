@@ -106,6 +106,7 @@ lateinit var  databaseHelper:DatabaseHelper
 
         //list.add(datamodel)
         val insert=databaseHelper.insertData(head,desc)
+        println("inser == $insert")
         if (insert!=-1L)
         {
             REDO(insert,head,desc)
