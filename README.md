@@ -1,7 +1,6 @@
+# Task_Manager_App
 
 
-
-Task Manager Android App
 This is a Task Manager application built for Android that allows users to manage their tasks efficiently. The app provides user authentication, CRUD operations, and communicates with a Django backend server using Retrofit.
 
 Features:
