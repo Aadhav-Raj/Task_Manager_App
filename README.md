@@ -7,6 +7,7 @@ This is a Task Manager application built for Android that allows users to manage
 Features:
 
 User Authentication: Secure login and registration with backend validation.
+Token Authorization: Implements token-based authentication for secure API access
 Email Verification: Email verification in Django using Gmail SMTP integration or Gmail email backend to send verification links.
 Task Management: Users can create, view, update, and delete tasks.
 Networking: Uses Retrofit to communicate with a Django backend.
